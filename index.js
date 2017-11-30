@@ -20,6 +20,7 @@ var app =express();
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
 app.post('/addProduct',function(req,res){
+	/* code to create to add product */
 	var name =req.body.name;
 	var cost =req.body.cost;
 	var picture=req.body.picture;
