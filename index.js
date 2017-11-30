@@ -31,7 +31,7 @@ app.post('/createOrder',function(req,res){
 	var status='placed';
     let body={order_summary:summary,order_cost:cost,order_date:date,user_contact:contact,user_name:name,order_address:address,order_status:status};
 	let sql='INSERT INTO orders SET ?';
-	let query=db.query(sql,body,function(err,result)=>
+	let query=db.query(sql,body,(err,result)=>
 	{
 		if(err)throw err;
 		res.send('Order placed');
