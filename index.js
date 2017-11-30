@@ -22,9 +22,9 @@ app.use(bodyparser.json());
 app.post('/addProduct',function(req,res){
 	var name =req.body.name;
 	var cost =req.body.cost;
-	var picture=req.body.picture,
-	var category=req.body.categroy,
-	var diet=req.body.diet
+	var picture=req.body.picture;
+	var category=req.body.category;
+	var diet=req.body.diet;
 	let body={product_name:name,product_cost:cost,product_picture:picture,product_category:category,product_diet:diet};
 	let sql='INSERT INTO products SET ?';
 	let query=db.query(sql,body,(err,result)=>{
