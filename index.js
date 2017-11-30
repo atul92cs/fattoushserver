@@ -38,6 +38,9 @@ app.post('/createOrder',function(req,res){
 	}
 	 );
 	});
+app.post('/',function(req,res){
+	res.send('appworks');
+});
 app.listen(80,function(){
 	
 	console.log('server started on 80');
