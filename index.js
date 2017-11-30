@@ -15,7 +15,7 @@ db.connect((error)=>{
 	
 	console.log('Database connected');
 });
-
+var port =process.env.PORT||8080;
 var app =express();
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
@@ -41,7 +41,7 @@ app.post('/createOrder',function(req,res){
 app.post('/',function(req,res){
 	res.send('appworks');
 });
-app.listen(3000,function(){
+app.listen(port,function(){
 	
 	console.log('server started on 80');
 });	
