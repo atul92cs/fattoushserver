@@ -89,6 +89,18 @@ app.get('/getProducts/:category',function(req,res){
 		
 	});
 });
+app.put('/updateOrder/:orderid',function(req,res){
+	var orderid=req.params.orderid;
+	var status='delivered';
+	let sql='UPDATE orders SET order_status = ? WHERE order_id=?';
+	let query=db.query(sql,[status,orderid],function(err,rows){
+		if(err)
+		{
+			console.log(err);
+		}
+		res.send('Order delivered').status(200);
+	});
+});
 app.listen(port,function(){
 	
 	console.log('server started on 80');
