@@ -54,6 +54,41 @@ app.post('/createOrder',function(req,res){
 app.post('/',function(req,res){
 	res.send('appworks');
 });
+app.get('/getProducts/:category',function(req,res){
+	var category=req.params.category;
+	let sql='SELECT product_name,product_cost,product_category,product_diet FROM products WHERE product_category=?';
+	let query=db.query(sql,[category],function(err,rows,fields){
+		
+		if(!err)
+		{
+			var response =[];
+			if(rows.length!=0)
+			{
+				for(var i=0;i<rows.length;i++)
+				{
+					/*var row = rows[i];*/
+					var name=rows[i].product_name;
+					var cost=rows[i].product_cost;
+					var category=rows[i].product_category;
+					var diet=rows[i].product_diet;
+					response.push({name,cost,category,diet});
+				}
+				
+			}
+			else
+			{
+				response.push({'response':'no data found'});
+				
+			}
+			res.json({response});
+		}
+		else
+		{
+			res.status(404).send('error occured');
+		}
+		
+	});
+});
 app.listen(port,function(){
 	
 	console.log('server started on 80');
