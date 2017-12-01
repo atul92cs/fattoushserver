@@ -89,6 +89,29 @@ app.get('/getProducts/:category',function(req,res){
 		
 	});
 });
+app.get('/orderDetails/:contact',function(req,res){
+	var contact = req.params.contact;
+	let sql ="SELECT MAX(order_id) FROM orders WHERE user_contact =?";
+	let query=db.query(sql,[contact],function(err,rows,fields){
+		if(!err)
+		{
+			var response=[];
+			if(rows.length!=0)
+			{
+				response.push({rows});
+			}
+			else
+			{
+				response.push({'response':'no data found '});
+			}
+			res.json(response);
+		}
+		else
+		{
+			res.status(400).send('error occured');
+		}
+	});
+});
 app.put('/updateOrder/:orderid',function(req,res){
 	var orderid=req.params.orderid;
 	var status='delivered';
@@ -101,7 +124,7 @@ app.put('/updateOrder/:orderid',function(req,res){
 		res.send('Order delivered').status(200);
 	});
 });
-app.listen(port,function(){
+app.listen(1901,function(){
 	
 	console.log('server started on 80');
 });	
