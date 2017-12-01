@@ -124,7 +124,7 @@ app.put('/updateOrder/:orderid',function(req,res){
 		res.send('Order delivered').status(200);
 	});
 });
-app.listen(1901,function(){
+app.listen(port,function(){
 	
 	console.log('server started on 80');
 });	
