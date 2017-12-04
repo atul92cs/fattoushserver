@@ -98,7 +98,11 @@ app.get('/getCategory',function(req,res){
 			var response =[];
 			if(rows.length!=0)
 			{
-				response.push({rows});
+				for(i=0;i<rows.length;i++)
+				{
+					var name =rows[i].product_category;
+					response.push({name});
+				}
 				
 			}
 			else
