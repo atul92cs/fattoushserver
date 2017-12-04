@@ -55,6 +55,7 @@ app.post('/',function(req,res){
 	res.send('appworks');
 });
 app.get('/getProducts/:category',function(req,res){
+	/*code to disply products*/
 	var category=req.params.category;
 	let sql='SELECT product_name,product_cost,product_category,product_diet FROM products WHERE product_category=?';
 	let query=db.query(sql,[category],function(err,rows,fields){
@@ -89,7 +90,33 @@ app.get('/getProducts/:category',function(req,res){
 		
 	});
 });
+app.get('/getCategory',function(req,res){
+	let sql='SELECT DISTINCT product_category FROM products';
+	let query=db.query(sql,function(err,rows,fields){
+		if(!err)
+		{
+			var response =[];
+			if(rows.length!=0)
+			{
+				response.push({rows});
+				
+			}
+			else
+			{
+				response.push({'response':'no data found'});
+				
+			}
+			res.json({response});
+		}
+		else
+		{
+			res.status(404).send('error occured');
+		}
+		
+	});
+});
 app.get('/orderDetails/:contact',function(req,res){
+	/*fetching order details to display it to user*/
 	var contact = req.params.contact;
 	let sql ="SELECT MAX(order_id) FROM orders WHERE user_contact =?";
 	let query=db.query(sql,[contact],function(err,rows,fields){
@@ -113,6 +140,7 @@ app.get('/orderDetails/:contact',function(req,res){
 	});
 });
 app.put('/updateOrder/:orderid',function(req,res){
+	/*code to update the order status*/
 	var orderid=req.params.orderid;
 	var status='delivered';
 	let sql='UPDATE orders SET order_status = ? WHERE order_id=?';
